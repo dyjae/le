@@ -1,29 +1,13 @@
-/*$(".input-clear").bind("click",function(e){
-	$(".search-input").val("")
-	//var input = document.getElementById('search_input')
-	//console.info(input)
-	window.setTimeout("$('#search-input')[0].focus()", 50);
-})*/
 
 document.getElementById('input-clear').addEventListener("click",function(){
 	$('.search-input').val("")
-	//var input = document.getElementById('search_input')
-	//console.info(input)
 	window.setTimeout("$('#search-input')[0].focus()", 10)
-	//$('.input-clear').hide()
+	$('.input-clear').hide()
 })
 
 $(".search-input").on("mouseup",function(e){
 	e.preventDefault()
 })
-
-/*$('.input-clear').bind('click',function(e){
-	$('.search-input').val("")
-	//var input = document.getElementById('search_input')
-	//console.info(input)
-	window.setTimeout("$('#search-input')[0].focus()", 10)
-	$('.input-clear').hide()
-})*/
 
 $(".search-input").bind("focus",function(){
 	$(".input-clear").show()
@@ -37,7 +21,17 @@ $(".search-input").bind("blur",function(){
 
 
 $(".glyphicon-search").bind("click",function(){
-	var word = $(".form-control").val()
+	$(".en-ph").hide();
+	$(".am-ph").hide();
+	$(".content").hide();
+	$(".content-trans").hide();
+	var word = $(".form-control").val().trim()
+	var rule = /^[A-Za-z]+$/;
+	  if(!rule.test(word))
+	  {
+	  alert("暂只支持英文搜索");
+	  return;
+	  }
 	var callBack = function(result){
 		if(result.success === true){
 			var results = result.results
@@ -52,21 +46,23 @@ $(".glyphicon-search").bind("click",function(){
 			
 			$(".en-mp3").attr("src","")
 			$(".am-mp3").attr("src","")
+			$(".other-mp3").attr("src","")
 			$(".en-ph").html("无")
-			$(".am-ph").html("无")
+			$(".am-mp3").html("无")
+			//$(".other").html("无")
 
-			var en_ph_html = ''
+			var en_ph_html = '英音'
 			if(ph_en != null && ph_en!= ''){
-				en_ph_html += '英音['+ph_en+']'
+				en_ph_html += '['+ph_en+']'
 			}
 			if(ph_en_mp3 != null && ph_en_mp3 !== ''){
 				en_ph_html += '<div class="glyphicon glyphicon-volume-up"></div>'
 				$(".en-mp3").attr("src",ph_en_mp3)
 			}
 			
-			var am_ph_html = ''
+			var am_ph_html = '美音'
 			if(ph_am != null && ph_am!= ''){
-				am_ph_html += '美音['+ph_am+']'
+				am_ph_html += '['+ph_am+']'
 			}
 			if(ph_am_mp3 != null && ph_am_mp3 !== ''){
 				am_ph_html += '<div class="glyphicon glyphicon-volume-up"></div>'
@@ -78,8 +74,16 @@ $(".glyphicon-search").bind("click",function(){
 				$(".en-mp3").attr("src",ph_other_mp3)
 			}
 			
+			if(en_ph_html === "英音"){
+				en_ph_html = "无"
+			}
+			if(am_ph_html === "美音"){
+				am_ph_html = "无"
+			}
 			$(".en-ph").html(en_ph_html)
 			$(".am-ph").html(am_ph_html)
+			$(".en-ph").show()
+			$(".am-ph").show()
 			$(".content").show()
 			
 			var appendHtml = ""
@@ -88,8 +92,12 @@ $(".glyphicon-search").bind("click",function(){
 				appendHtml += '<li class="list-group-item">'+tran.part+tran.means+'</li>'
 			}
 			$(".list-group").html(appendHtml)
+			$(".content-trans").show()
+		}else{
+			$(".other").html("暂无此翻译！")
+			$(".content").show()
+			$(".other").show()
 		}
-		window.setTimeout("$('search-input').focus()", 50);
 	} 
 	$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
 	//$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);

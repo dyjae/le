@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--  user-scalable=no 禁止用户缩放-->
+<meta  charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>search page</title>
+<link href="../plugin/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="search">
+	<div class="input-group search-box">
+      <input id="search-input" type="text" class="form-control search-input" placeholder="输入你想搜索的英文">
+      <div class="input-clear" ></div>
+      <span class="input-group-btn">
+     	 <button id="input-clear" class="btn btn-default glyphicon glyphicon-remove input-clear" type="button"></button> 
+        <button class="btn btn-default glyphicon glyphicon-search " type="button"></button>
+      </span>
+    </div> 
+</div>
+<div class="content">
+	<div class="content-voice">
+		<audio id="enmp3" class="en-mp3" style="display:none;" src="http://res.iciba.com/resource/amp3/oxford/0/22/97/2297067c3e5d25a542d1c1268d474d95.mp3" controls="controls"></audio>
+		<audio id="ammp3" class="am-mp3" style="display:none;" src="http://res.iciba.com/resource/amp3/oxford/0/22/97/2297067c3e5d25a542d1c1268d474d95.mp3" controls="controls"></audio>
+		<audio id="othermp3" class="other-mp3" style="display:none;" src="http://res.iciba.com/resource/amp3/oxford/0/22/97/2297067c3e5d25a542d1c1268d474d95.mp3" controls="controls"></audio>
+		<div class="en-ph"></div>
+		<div class="am-ph"></div>
+		<div class="other"></div>
+	</div>
+	
+	<div class="content-trans">
+		<ul class="list-group">
+			<!-- <li class="list-group-item">1</li>
+			<li class="list-group-item">2</li>
+			<li class="list-group-item">3</li> -->
+		</ul>
+	</div>
+</div>
+
+</body>
+
+<script src="../plugin/Jquery/jquery-3.2.1.min.js"></script>
+<script src="../plugin/bootstrap3/js/bootstrap.min.js"></script>
+<script src="../js/search2.js"></script>
+<script type="text/javascript"></script>
+
+<style>
+body{
+	background-color: #efefef;
+}
+.search{
+	background-color: #fff;
+	width: 95%;
+	height: 100px;
+	margin-left:2.5%;
+	margin-right:2.5%;
+	margin-top:10px;
+	margin-bottom:5px;
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.search .search-box{
+	margin-top:10px;
+	padding: 30px;
+}
+.search .search-box button{
+    margin-top: -2px;
+}
+.content{
+	/* background-color: #fff; */
+	width: 95%;
+	height: auto;
+	margin-left:2.5%;
+	margin-right:2.5%;
+}
+
+.content-voice{
+	/* background-color: #fff; */
+	height: 100px;
+}
+.en-ph{
+	background-color: #fff;
+	width: 49%;
+	height: 95%;
+	float:left;
+	margin:1px;
+	-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display:none;
+    text-align:center;
+    padding-top: 12%;
+}
+/* rgba(83, 59, 59, 0.08) */
+.am-ph{
+	background-color: #fff;
+	width: 49%;
+	height: 95%;
+	float:right;
+	margin:1px;
+	-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display:none;
+    text-align:center;
+    padding-top: 12%;
+}
+
+.other{
+	background-color: #fff;
+	height: 95%;
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin:1px;
+    text-align:center;
+    display:none;
+    padding-top: 12%;
+}
+
+</style>
+</html>
