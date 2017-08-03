@@ -53,6 +53,14 @@
       <artifactId>spring-orm</artifactId>
       <version>${spring.version}</version>
     </dependency>
+    
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <version>${spring.version}</version>
+	    <scope>test</scope>
+	</dependency>
+    
 
 
     <!-- mysql数据库驱动 -->
@@ -177,7 +185,12 @@
 	    <version>${httpclient.version}</version>
 	</dependency>
 	
-    
+    <!-- 生成xml -->
+	<dependency>
+	    <groupId>com.thoughtworks.xstream</groupId>
+	    <artifactId>xstream</artifactId>
+	    <version>1.4.10</version>
+	</dependency>
 	
 
 
