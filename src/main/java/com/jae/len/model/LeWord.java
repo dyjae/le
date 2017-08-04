@@ -37,6 +37,17 @@ public class LeWord extends EntityBean{
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="word",cascade=CascadeType.ALL)
 	private List<LePhonetic> phonetics;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="word",cascade=CascadeType.ALL)
+	private List<LeUserWord> user;
+	
+	public List<LeUserWord> getUser() {
+		return user;
+	}
+
+	public void setUser(List<LeUserWord> user) {
+		this.user = user;
+	}
 
 	public Integer getId() {
 		return id;
