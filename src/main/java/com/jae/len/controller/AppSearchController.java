@@ -157,8 +157,8 @@ public class AppSearchController {
 			record.setWordName(word);
 			record.setUser(user);
 			userWordService.save(record);
-		}else{
-			record.setState(2);
+		}else if(record.getState() != 0){
+			record.setState(0);
 			userWordService.update(record);
 		}
 		return result;

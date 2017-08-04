@@ -37,6 +37,9 @@ public class LeUser extends EntityBean{
 	@Column(name = "REAL_NAME", columnDefinition="varchar(100) COMMENT '真实姓名'")
 	private String realName;
 	
+	@Column(name = "token", columnDefinition="varchar(255) COMMENT '用户token'")
+	private String token;
+	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="user",cascade=CascadeType.ALL)
 	private List<LeUserWord> words;
 

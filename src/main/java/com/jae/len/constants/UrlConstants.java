@@ -8,6 +8,8 @@ public class UrlConstants {
 
 	public static final String APP_SEARCH_GET = "/search/{word}";
 	
+	public static final String APP_WORD_POST = "/word/";
+	
 	
 	
 	

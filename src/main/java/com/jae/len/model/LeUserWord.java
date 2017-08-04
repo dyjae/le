@@ -36,23 +36,23 @@ public class LeUserWord extends EntityBean{
 	@JoinColumn(name = "user_id")
 	private LeUser user;
 	
-	@Column(name = "STATE", columnDefinition="int default 0 COMMENT '状态 0：背诵中 1：已完成 2：重背中'")
-	private Integer state;
+	@Column(name = "STATE", columnDefinition="int default 0 COMMENT '状态 0：背诵中 1：已完成'")
+	private int state;
 	
 	@Column(name = "TOTAL_TIMES",columnDefinition="int default 0 COMMENT '总背诵次数'")
-	private Integer Totaltimes;
+	private int Totaltimes;
 	
 	@Column(name = "TOLTAL_ERROR_TIMES",columnDefinition="int default 0 COMMENT '总错误次数'")
-	private Integer TolErrorTimes;
+	private int TolErrorTimes;
 	
 	@Column(name = "TOTAL_RIGHT_TIMES",columnDefinition="int default 0 COMMENT '总正确次数'")
-	private Integer TolRightTimes;
+	private int TolRightTimes;
 	
 	@Column(name = "ERROR_TIMES",columnDefinition="int default 0 COMMENT '错误次数'")
-	private Integer errorTimes;
+	private int errorTimes;
 	
 	@Column(name = "RIGHT_TIMES",columnDefinition="int default 0 COMMENT '正确次数'")
-	private Integer rightTimes;
+	private int rightTimes;
 	
 	private Date createTm;
 	
@@ -90,51 +90,51 @@ public class LeUserWord extends EntityBean{
 		this.user = user;
 	}
 
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 
-	public Integer getTotaltimes() {
+	public int getTotaltimes() {
 		return Totaltimes;
 	}
 
-	public void setTotaltimes(Integer totaltimes) {
+	public void setTotaltimes(int totaltimes) {
 		Totaltimes = totaltimes;
 	}
 
-	public Integer getTolErrorTimes() {
+	public int getTolErrorTimes() {
 		return TolErrorTimes;
 	}
 
-	public void setTolErrorTimes(Integer tolErrorTimes) {
+	public void setTolErrorTimes(int tolErrorTimes) {
 		TolErrorTimes = tolErrorTimes;
 	}
 
-	public Integer getTolRightTimes() {
+	public int getTolRightTimes() {
 		return TolRightTimes;
 	}
 
-	public void setTolRightTimes(Integer tolrightTimes) {
-		TolRightTimes = tolrightTimes;
+	public void setTolRightTimes(int tolRightTimes) {
+		TolRightTimes = tolRightTimes;
 	}
 
-	public Integer getErrorTimes() {
+	public int getErrorTimes() {
 		return errorTimes;
 	}
 
-	public void setErrorTimes(Integer errorTimes) {
+	public void setErrorTimes(int errorTimes) {
 		this.errorTimes = errorTimes;
 	}
 
-	public Integer getRightTimes() {
+	public int getRightTimes() {
 		return rightTimes;
 	}
 
-	public void setRightTimes(Integer rightTimes) {
+	public void setRightTimes(int rightTimes) {
 		this.rightTimes = rightTimes;
 	}
 
@@ -153,7 +153,5 @@ public class LeUserWord extends EntityBean{
 	public void setUpdateTm(Date updateTm) {
 		this.updateTm = updateTm;
 	}
-	
-	
-	
+
 }

@@ -101,6 +101,7 @@ public class WxResquestController {
 			
 			if(TEXT.equals(msgType)){
 				//文字类型
+				@SuppressWarnings("unused")
 				String content = json.getString("Content");
 				wxResult.setMsgType(TEXT);
 				wxResult.setContent("已经收到消息！");
@@ -113,33 +114,47 @@ public class WxResquestController {
 				
 			}else if(IMAGE.equals(msgType)){
 				//图片消息
+				@SuppressWarnings("unused")
 				String mediaId = json.getString("MediaId");
+				@SuppressWarnings("unused")
 				String picUrl = json.getString("PicUrl");
 				System.out.println("图片");
 			}else if(VIDEO.equals(msgType)||SHORTVIDEO.equals(msgType)){
+				@SuppressWarnings("unused")
 				String mediaId = json.getString("MediaId");
 				//视频消息  视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据
 				//小视频消息
+				@SuppressWarnings("unused")
 				String thumbMediaId = json.getString("ThumbMediaId");
 				System.out.println("视频");
 			}else if(VOICE.equals(msgType)){
+				@SuppressWarnings("unused")
 				String mediaId = json.getString("MediaId");
 				//语音消息
+				@SuppressWarnings("unused")
 				String format = json.getString("Format");
 				//语音识别   开通语音识别后
+				@SuppressWarnings("unused")
 				String recognition = json.getString("Recognition");
 				System.out.println("语音");
 			}else if(LOCATION.equals(msgType)){
 				//地理位置消息
+				@SuppressWarnings("unused")
 				String locationX = json.getString("Location_X"); //地理位置维度
+				@SuppressWarnings("unused")
 				String locationY = json.getString("Location_Y");	//	地理位置经度
+				@SuppressWarnings("unused")
 				String scale = json.getString("Scale");	//地图缩放大小
+				@SuppressWarnings("unused")
 				String label = json.getString("Label");	//地理位置信息
 				System.out.println("地理位置");
 			}else if(LINK.equals(msgType)){
 				//链接消息
+				@SuppressWarnings("unused")
 				String title = json.getString("Title");
+				@SuppressWarnings("unused")
 				String description = json.getString("Description");
+				@SuppressWarnings("unused")
 				String url = json.getString("Url");
 				System.out.println("链接");
 			}
