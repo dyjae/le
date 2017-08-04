@@ -61,8 +61,9 @@ public abstract class EntityServiceImpl<T extends Serializable> implements
 		return (T) dao.getById(id, clazz);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public T getByIdEnable(Serializable id, Class<T> clazz){
+	public T getByIdEnable(Serializable id){
 		return (T) dao.getByIdEnable(id, clazz);
 	}
 

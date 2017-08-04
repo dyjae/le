@@ -37,6 +37,7 @@ public class MyExceptionResolver implements HandlerExceptionResolver{
 	            //错误信息  
 				response.getWriter().write(JSONObject.toJSONString(ResultUtil.error(lsException.getCode(),lsException.getErrMsg())));
 	        }else
+	        	ex.printStackTrace();
 	        	response.getWriter().write(JSONObject.toJSONString(ResultUtil.error(-1,ex.getMessage())));
     	} catch (IOException e) {
             //log.error("与客户端通讯异常:"+ e.getMessage(), e);  

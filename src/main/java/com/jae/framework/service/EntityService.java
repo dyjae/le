@@ -95,7 +95,7 @@ public interface EntityService<T extends Serializable> {
 	 * @param clazz
 	 * @return
 	 */
-	public T getByIdEnable(Serializable id, Class<T> clazz);
+	public T getByIdEnable(Serializable id);
  
 	/**
 	 *	根据单个属性获取对象
