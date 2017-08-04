@@ -21,8 +21,10 @@ $(".search-input").bind("blur",function(){
 
 
 $(".glyphicon-search").bind("click",function(){
+	$(".input-clear").hide()
 	$(".en-ph").hide();
 	$(".am-ph").hide();
+	$(".other").hide();
 	$(".content").hide();
 	$(".content-trans").hide();
 	var word = $(".form-control").val().trim()
@@ -99,8 +101,8 @@ $(".glyphicon-search").bind("click",function(){
 			$(".other").show()
 		}
 	} 
-	$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
-	//$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);
+	//$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
+	$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);
 })
 
 $(".en-ph").bind("click",function(){

@@ -91,7 +91,7 @@ $(".glyphicon-search").bind("click",function(){
 		}
 		window.setTimeout("$('search-input').focus()", 50);
 	} 
-	$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
+$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
 	//$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);
 })
 

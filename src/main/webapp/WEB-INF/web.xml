@@ -4,7 +4,7 @@
   <display-name>Jae Blog</display-name>
   
   <welcome-file-list>
-    <welcome-file>page/search.html</welcome-file>
+    <welcome-file>page/search2.html</welcome-file>
   </welcome-file-list>
 
 	<!-- 加载所有的配置文件 -->  

@@ -64,8 +64,9 @@
         </property>
         <property name="packagesToScan">
             <list>
-                <value>com.jae.program.model</value>
                 <value>com.jae.len.model</value>
+                <value>com.jae.program.model</value>
+                <value>com.jae.weixin.model</value>
             </list>
         </property>
     </bean>
@@ -105,6 +106,7 @@
     <context:annotation-config />
     <context:component-scan base-package="com.jae.framework" />
     <context:component-scan base-package="com.jae.program" />
-    <context:component-scan base-package="com.jae.len" />
+    <context:component-scan base-package="com.jae.le" />
+    <context:component-scan base-package="com.jae.weixin" />
 
 </beans>
