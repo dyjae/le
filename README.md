@@ -6,3 +6,5 @@ www.alanjae.com
 
 # function list
 1.search word (only English word)
+
+#
