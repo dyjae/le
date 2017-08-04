@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 import javax.xml.transform.OutputKeys;
@@ -19,12 +21,18 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 
 public final class XMLUtil {
 
@@ -392,4 +400,130 @@ public final class XMLUtil {
 		format.setEncoding("GBK");
 		return savaToFile(doc, filePathName, format);
 	}
+
+	
+	public static String toAttribute(String s) {
+		return s;
+	}
+
+	public static boolean isEmpty(Element parent, String childTagName) {
+		Element child = parent.element(childTagName);
+		return (child == null) || (StringUtils.isEmpty(child.getText()));
+	}
+
+	public static int getInt(Element parent, String childTagName) {
+		String text = parent.elementText(childTagName);
+			return Integer.parseInt(text);
+	}
+
+	public static boolean getBoolean(Element parent, String childTagName) {
+		return Boolean.parseBoolean(parent.elementText(childTagName));
+	}
+
+	public static String getString(Element parent, String childTagName) {
+		return parent.elementText(childTagName);
+	}
+	
+	public static JSONObject toJson(String xml){
+		return toJson(xml, null);
+	}
+	public static JSONObject toJson(String xml,String rootName){
+		//System.out.println(xml);
+		if(rootName==null){
+			rootName="xml";
+		}
+		JSONObject json=new JSONObject();
+		@SuppressWarnings("unused")
+		SAXReader reader = new SAXReader();
+		try {
+			Document document=DocumentHelper.parseText(xml);
+			//Document document = reader.read(new ByteArrayInputStream(xml2.getBytes()));
+			//System.out.println(document.asXML());
+			Element root = document.getRootElement();
+			_toJson(json, root);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return (JSONObject)json.get(rootName);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void _toJson(JSONObject parentJson,Element e){
+		List<Element> elements = e.elements();
+		
+		String name = e.getName();
+		int size = elements.size();
+		if(size==0){//叶子节点
+			parentJson.put(name, e.getTextTrim());
+		}else{
+			if(size>1&&elements.get(0).getName().equals(elements.get(1).getName())){
+				//数组
+				JSONArray jsons=new JSONArray();
+				for(int i=0;i<size;i++){
+					JSONObject json=new JSONObject();
+					_toJson(json, elements.get(i));
+					jsons.add(json);
+				}
+				parentJson.put(name,jsons);
+			}else{
+				JSONObject json=new JSONObject();
+				for(int i=0;i<size;i++){
+					_toJson(json, elements.get(i));
+				}
+				parentJson.put(name, json);
+			}
+		}
+	}
+	
+	public static String toXml(JSONObject json){
+		return toXml(json, null);
+	}
+	
+	public static String toXml(JSONObject json,String rootName){
+		return toXml(json, rootName, true);
+	}
+	public static String toXml(JSONObject json,String rootName,boolean isCDATAText){
+		if(rootName==null){
+			rootName="xml";
+		}
+		
+		Document doc=DocumentHelper.createDocument();
+		Element root=doc.addElement(rootName);
+		_toXml(root, json,isCDATAText);
+		return doc.getRootElement().asXML();
+	}
+	public static void _toXml(Element e,Object value,boolean isCDATAText){
+		if(value instanceof JSONArray){
+			JSONArray items=(JSONArray)value;
+			for(int i=0;i<items.size();i++){
+				JSONObject item = items.getJSONObject(i);//只能是jsonobject
+				for(Iterator<String> iter=item.keySet().iterator();iter.hasNext();){
+					String name=iter.next();
+					Element subElement = e.addElement(name);
+					if(item.get(name)!=null)
+					_toXml(subElement,item.get(name),isCDATAText);
+				}
+			}
+		}else if(value instanceof JSONObject){
+			JSONObject json=(JSONObject)value;
+			for(Iterator<String> iter=json.keySet().iterator();iter.hasNext();){
+				String name=iter.next();
+				if(json.get(name)!=null){
+					Element subElement = e.addElement(name);
+					_toXml(subElement,json.get(name),isCDATAText);
+				}
+			}
+			
+		}else{
+			if(isCDATAText){
+				e.addCDATA(value.toString());
+			}else{
+				e.addText(value.toString());
+			}
+			return;
+		}
+	}
+	
+
+
 }

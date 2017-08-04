@@ -253,7 +253,7 @@ public class DateUtil {
 	 * @since 
 	 * @param startDate
 	 * @param endDate
-	 * @return 0:相等  1:大于  2:小与
+	 * @return 0:相等  大于0:大于  小于0:小与
 	 */
 	public static int compareDate(Date startDate,Date endDate){
 		return startDate.compareTo(endDate);
@@ -311,6 +311,13 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(addDate);
         calendar.add(Calendar.DAY_OF_MONTH, addNum);
+        return calendar.getTime();
+	}
+	
+	public static Date addHours(Date addDate,int addNum){
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(addDate);
+        calendar.add(Calendar.HOUR_OF_DAY, addNum);
         return calendar.getTime();
 	}
 	
