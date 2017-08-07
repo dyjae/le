@@ -21,12 +21,12 @@
 	<mvc:resources mapping="/plugin/**" location="/plugin/" />
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/key/**" location="/key/" />
-	<mvc:resources mapping="/WEB-INF/jsp/*.html" location="/WEB-INF/jsp/" />
+	<mvc:resources mapping="/sshBase/page/*.html" location="/page/" />
 	
 	<!-- 定义视图解析器 -->   
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
+		<property name="prefix" value="/page/" />
+		<property name="suffix" value=".html" />
 	</bean>
 	
 	<!-- 异常处理 -->

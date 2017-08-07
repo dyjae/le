@@ -66,7 +66,7 @@ public class AppReciteController {
 		
 		DataMap results = new DataMap();
 		convertUserWords(userWords,results);
-		result.setResults("results", results);
+		result.setResults(results);
 		return result;
 	}
 
