@@ -8,17 +8,47 @@
 
 </head>
 <body>
-	<div class="word">
-		<span class="word_txt"></span>
+	<div class="recite_page" >
+		<div class="word">
+			<span class="word_txt"></span>
+		</div>
+		<div class="choose">
+			<ul class="list-group choose_group">
+					<!-- <li class="list-group-item">1</li>
+					<li class="list-group-item">2</li>
+					<li class="list-group-item">3</li>
+					<li class="list-group-item">4</li> -->
+			</ul>
+		</div>
 	</div>
-	<div class="choose">
-		<ul class="list-group choose_group">
+	
+	
+	<div class="detail_page" style="display:none">
+		<div class="detail_word">
+			<span class="detail_word_txt"></span>
+		</div>
+		
+		<div class="content">
+		<div class="content-voice">
+			<audio id="enmp3" class="en-mp3" style="display:none;" src="#" controls="controls"></audio>
+			<audio id="ammp3" class="am-mp3" style="display:none;" src="#" controls="controls"></audio>
+			<audio id="othermp3" class="other-mp3" style="display:none;" src="#" controls="controls"></audio>
+			<div class="en-ph"></div>
+			<div class="am-ph"></div>
+			<div class="other"></div>
+		</div>
+		
+		<div class="content-trans">
+			<ul class="list-group detail_trans">
 				<!-- <li class="list-group-item">1</li>
 				<li class="list-group-item">2</li>
-				<li class="list-group-item">3</li>
-				<li class="list-group-item">4</li> -->
-		</ul>
+				<li class="list-group-item">3</li> -->
+			</ul>
+		</div>
+	</div>	
 	</div>
+	
+	
 </body>
 
 <script src="./plugin/Jquery/jquery-3.2.1.min.js"></script>
@@ -31,7 +61,7 @@ body{
 	background-color: #efefef;
 	text-align: center;
 }
-.word{
+.word,.detail_word{
 	border: 1px solid #ddd;
 	background-color: #fff;
 	height: 200px;
@@ -50,6 +80,64 @@ body{
 	font-size: 20px;
 	height: 100px;
 	padding-top: 1em;
+}
+
+
+
+
+.content{
+	/* background-color: #fff; */
+	width: 95%;
+	height: auto;
+	margin-left:2.5%;
+	margin-right:2.5%;
+}
+
+.content-voice{
+	/* background-color: #fff; */
+	height: 100px;
+}
+.en-ph{
+	background-color: #fff;
+	width: 49%;
+	height: 95%;
+	float:left;
+	margin:1px;
+	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    display:none;
+    text-align:center;
+    padding-top: 12%;
+}
+/* rgba(83, 59, 59, 0.08) */
+.am-ph{
+	background-color: #fff;
+	width: 49%;
+	height: 95%;
+	float:right;
+	margin:1px;
+	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    display:none;
+    text-align:center;
+    padding-top: 12%;
+}
+
+.other{
+	background-color: #fff;
+	height: 95%;
+	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin:1px;
+    text-align:center;
+    display:none;
+    padding-top: 12%;
 }
 </style>
 </html>
