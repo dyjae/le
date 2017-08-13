@@ -5,6 +5,7 @@ a webapp for learn english
 www.alanjae.com
 
 # function list
+v0.5
 1.search word (only English word)
+2.recite word (www.alanjae.com/recite)
 
-#
