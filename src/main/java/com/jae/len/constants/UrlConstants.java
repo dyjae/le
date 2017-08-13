@@ -10,7 +10,10 @@ public class UrlConstants {
 	
 	public static final String APP_WORD_POST = "/word/";
 	
+	public static final String APP_RECITE_POST = "/recite/{word}";
 	
+	//跳转到翻译页
+	public static final String APP_RECITE_PAGE = "/recite";
 	
 	
 	

@@ -9,6 +9,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,6 +70,48 @@ public class AppReciteController {
 		result.setResults(results);
 		return result;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value=UrlConstants.APP_RECITE_POST,method=RequestMethod.POST)
+	public ResultVo addRecite(
+			@RequestParam(required=false) String token,
+			@RequestParam(required=false) String type,
+			@RequestParam(required=false) Integer num,
+			@PathVariable(required=true) String word
+			){
+		ResultVo result = new ResultVo();
+		LeUser user = new LeUser();
+		if(StringUtils.isEmpty(token)){
+			user = userService.getByPropertySingle("mobile", "13886499962");
+		}else{
+			user = userService.getByPropertySingle("token", token);
+		}
+		
+		try {
+			LeUserWord userWord = userWordService.getByPropertysSingle(new String[]{"user","wordName"}, new Object[]{user,word});
+			if(type.equals("add")){
+				userWord.setTotaltimes(userWord.getTotaltimes()+1);
+				userWord.setTolRightTimes(userWord.getTolRightTimes()+1);
+				int rightTimes = userWord.getRightTimes()+num;
+				userWord.setRightTimes(rightTimes);
+				if(rightTimes == 10){
+					userWord.setState(1);
+					userWord.setRightTimes(0);
+					userWord.setErrorTimes(0);
+				}
+			}else if(type.equals("sub")){
+				userWord.setTotaltimes(userWord.getTotaltimes()+1);
+				userWord.setTolErrorTimes(userWord.getTolRightTimes()+1);
+				userWord.setErrorTimes(userWord.getErrorTimes()+num);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 
 	private DataMap convertUserWords(List<LeUserWord> datas, DataMap results) {
 		if(datas.size()==0){
@@ -110,10 +153,10 @@ public class AppReciteController {
 		DataMap times = new DataMap();
 		times.set("state", data.getState());
 		times.set("total_times", data.getTotaltimes());
-		times.set("toltal_error_times", data.getTolErrorTimes());
+		times.set("total_error_times", data.getTolErrorTimes());
 		times.set("total_right_times", data.getTolRightTimes());
 		times.set("error_times", data.getErrorTimes());
-		times.set("right_Times", data.getRightTimes());
+		times.set("right_times", data.getRightTimes());
 		times.set("updateTm", data.getUpdateTm());
 		
 		
@@ -122,6 +165,10 @@ public class AppReciteController {
 		result.set("times", times);
 		return result;
 	}
+	
+	
+	
+	
 	
 /*	results{
 		wordName : {
@@ -171,7 +218,7 @@ public class AppReciteController {
 				TOLTAL_ERROR_TIMES : 0,
 				TOTAL_RIGHT_TIMES : 1,
 				ERROR_TIMES : 2,
-				rightTimes : 3,
+				right_Times : 3,
 				updateTm : dfsdfsd,
 			}
 		

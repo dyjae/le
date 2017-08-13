@@ -21,6 +21,10 @@ $(".search-input").bind("blur",function(){
 
 
 $(".glyphicon-search").bind("click",function(){
+	searchfunc()	
+})
+
+function searchfunc(){
 	$(".input-clear").hide()
 	$(".en-ph").hide();
 	$(".am-ph").hide();
@@ -103,7 +107,9 @@ $(".glyphicon-search").bind("click",function(){
 	} 
 	//$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
 	$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);
-})
+}
+
+
 
 $(".en-ph").bind("click",function(){
 	var mp3 = $(".en-mp3").attr("src")
@@ -120,4 +126,21 @@ $(".am-ph").bind("click",function(){
 		audio.play()
 	}
 })
+
+
+$('.search-input').on('keypress', (event) => { //#txt是个text input
+	if (event.keyCode == 13)
+	  {
+		  searchfunc()
+	  }
+	//alert(evt.keyCode);
+});
+
+/*function KeyDown()
+{
+  if (event.keyCode == 13)
+  {
+	  searchfunc()
+  }
+}*/
 

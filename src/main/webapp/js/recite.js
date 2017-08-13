@@ -66,9 +66,22 @@ function loadPage(){
 	var now_word = localWord[loadWord]
 	var now_trans = now_word.trans
 	var now_phonetics = now_word.phonetics
-	var now_times = wordTimes[loadWord].times
+	//当前背次数集合
+	var now_times = wordTimes[loadWord]
+	//当前单词错误总次数
+	var total_error_times = now_times.total_error_times
+	//当前单词当前正确次数
+	var right_times = now_times.right_times
+	//界面显示翻译词数组
 	var trans_array = []
+	//正确翻译
 	var true_tran = now_word.trans[0].part+now_word.trans[0].means
+	var param = {
+		type : 'add',
+		num	: '1'
+	}
+	
+	
 	
 	//把现在单词的翻译放在一个数组中
 	var now_trans_array = []
@@ -101,26 +114,59 @@ function loadPage(){
 	$(".tran_li").bind("click",function(){
 		var trueText = this.innerText
 		console.info(this.innerText)
-		
 		//总次数+1
 		
 		if(true_tran === trueText){
 			//回答正确的时候
 			//正确次数+1
+			++right_times 
+			wordTimes[loadWord].right_times = right_times
+			
 			//loadWord 变到下一个
-			var i = wordArray.indexOf(loadWord)
-			loadWord = wordArray[++i]
+			var wordIndex = wordArray.indexOf(loadWord)
+			var i = wordIndex+1
+			if(i === wordArray.length){
+				i = 0
+			}
+			loadWord = wordArray[i]
 			loadPage()
 			
 			//判断是否已经正确10次
-			//正确十次
-			//wordArray  localWord wordTimes 移除该单词
+			if(right_times === 10){
+				//正确十次
+				//word wordArray  localWord wordTimes 移除该单词
+				wordArray.remove(wordIndex)
+				delete localWord[loadWord]
+				delete wordTimes[loadWord]
+				delete word[loadWord]
+			}
 		}else{
+			param.type = 'sub'
+			//错误次数+1
+			wordTimes[loadWord].total_error_times = total_error_times+1
+			//显示单词详情
 			$(".recite_page").hide()
 			$(".detail_page").show()
-			//错误次数+1
-			//显示单词详情
+			autoPlay()
 		}
+		
+		$.ajax({
+			type:"post",
+			url:"http://localhost:8080/sshBase/app/recite/"+loadWord,
+			async:true,
+			dataType:"json",
+			data:param
+		});
+		
+		
+		localStorage.setItem("word",JSON.stringify(localWord))
+		//只有单词名称数组
+		localStorage.setItem("wordArray",JSON.stringify(wordArray))
+		localStorage.setItem("wordTimes",JSON.stringify(wordTimes))
+		//当前要背单词
+		localStorage.setItem("loadWord",loadWord)
+		//所有翻译数组
+		localStorage.setItem("wordTrans",JSON.stringify(wordTrans))
 		
 	})
 	
@@ -194,7 +240,23 @@ function loadDetailPage(){
 	}
 	$(".detail_trans").html(appendHtml)
 	$(".content-trans").show()
+	
+	autoPlay()
 }
+
+function autoPlay(){
+	//自动播放声音
+	var mp3 = $(".en-mp3").attr("src")
+	var mp3_am = $(".am-mp3").attr("src")
+	if(mp3 !=null && mp3 != ""){
+		var audio = document.getElementById('enmp3')
+		audio.play()
+	}else if(mp3_am !=null && mp3_am != ""){
+		var audio = document.getElementById('ammp3')
+		audio.play()
+	}
+}
+
 
 $(".en-ph").bind("click",function(){
 	var mp3 = $(".en-mp3").attr("src")
