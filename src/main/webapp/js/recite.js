@@ -50,7 +50,8 @@ $(document).ready(function(){
 	if(localWord == null || localWord == "" || localWord == "undefine"){
 		$.ajax({
 			type:"post",
-			url:"http://localhost:8080/sshBase/app/word/",
+			//url:"http://localhost:8080/sshBase/app/word/",
+			url:"http://www.alanjae.com/sshBase/app/word/",
 			async:false,
 			success:callback,
 			dataType:"json",
@@ -146,13 +147,15 @@ function loadPage(){
 			wordTimes[loadWord].total_error_times = total_error_times+1
 			//显示单词详情
 			$(".recite_page").hide()
+			$(".header").hide()
 			$(".detail_page").show()
 			autoPlay()
 		}
 		
 		$.ajax({
 			type:"post",
-			url:"http://localhost:8080/sshBase/app/recite/"+loadWord,
+			//url:"http://localhost:8080/sshBase/app/recite/"+loadWord,
+			url:"http://www.alanjae.com/sshBase/app/recite/"+loadWord,
 			async:true,
 			dataType:"json",
 			data:param
@@ -277,12 +280,18 @@ $(".am-ph").bind("click",function(){
 
 $(".detail_word").bind("click",function(){
 	$(".recite_page").show()
+	$(".header").show()
 	$(".detail_page").hide()
 })
 
 $(".content-trans").bind("click",function(){
 	$(".recite_page").show()
+	$(".header").show()
 	$(".detail_page").hide()
+})
+
+$('.left').bind("click",function(){
+	self.location='search2.html'; 
 })
 
 

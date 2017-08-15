@@ -12,13 +12,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration   ({"classpath:applicationContext.xml","classpath:spring-servlet.xml"}) 
 public class WXGetTokenServiceTest {
 
-	@Autowired
+	/*@Autowired
 	WxGetTokenService  tokenService;
 
 	@Test
 	public void test() {
 		String token = tokenService.getToken();
 		System.out.println(token);
-	}
+	}*/
 
 }

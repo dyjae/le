@@ -105,8 +105,8 @@ function searchfunc(){
 			$(".other").show()
 		}
 	} 
-	//$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
-	$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);
+	$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
+	//$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);
 }
 
 
@@ -136,11 +136,7 @@ $('.search-input').on('keypress', (event) => { //#txt是个text input
 	//alert(evt.keyCode);
 });
 
-/*function KeyDown()
-{
-  if (event.keyCode == 13)
-  {
-	  searchfunc()
-  }
-}*/
+$('.right').bind("click",function(){
+	self.location='recite.html'; 
+})
 
