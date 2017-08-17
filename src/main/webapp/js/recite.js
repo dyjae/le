@@ -108,7 +108,7 @@ function loadPage(){
 	var li_html = ""
 	$(".choose_group").html("")
 	for(var li_tran in trans_array){
-		li_html = '<li class="list-group-item tran_li" >'+trans_array[li_tran]+'</li>'
+		li_html = '<li class="list-group-item tran_li" ><p class="li_content">'+trans_array[li_tran]+'</p></li>'
 		$(".choose_group").append(li_html);
 		
 	}

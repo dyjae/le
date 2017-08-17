@@ -105,8 +105,8 @@ function searchfunc(){
 			$(".other").show()
 		}
 	} 
-	$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
-	//$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);
+	//$.getJSON("http://www.alanjae.com/sshBase/app/search/"+word, callBack);
+	$.getJSON("http://localhost:8080/sshBase/app/search/"+word, callBack);
 }
 
 
